@@ -67,3 +67,14 @@ func (t *Tuple) Divide(scalar float64) *Tuple {
 func (t *Tuple) Magnitude() float64 {
 	return math.Sqrt(math.Pow(t.x, 2) + math.Pow(t.y, 2) + math.Pow(t.z, 2))
 }
+
+func (t *Tuple) Normalize() *Tuple {
+	magnitude := t.Magnitude()
+
+	return &Tuple{
+		x: t.x / magnitude,
+		y: t.y / magnitude,
+		z: t.z / magnitude,
+		w: 0,
+	}
+}

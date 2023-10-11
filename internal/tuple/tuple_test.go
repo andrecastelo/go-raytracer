@@ -2,6 +2,7 @@ package tuple
 
 import (
 	"andrecastelo/raytracer/internal/compare"
+	"fmt"
 	"math"
 	"testing"
 
@@ -10,6 +11,13 @@ import (
 
 type TupleSuite struct {
 	suite.Suite
+}
+
+func (suite *TupleSuite) EqualTuples(t1 *Tuple, t2 *Tuple) {
+	suite.True(compare.Equal(t1.x, t2.x), fmt.Sprintf("%.12f is not equal to %.12f", t1.x, t2.x))
+	suite.True(compare.Equal(t1.y, t2.y), fmt.Sprintf("%.12f is not equal to %.12f", t1.y, t2.y))
+	suite.True(compare.Equal(t1.z, t2.z), fmt.Sprintf("%.12f is not equal to %.12f", t1.z, t2.z))
+	suite.Equal(t1.w, t2.w)
 }
 
 func (suite *TupleSuite) TestPointIsCreatedCorrectly() {
@@ -130,6 +138,16 @@ func (suite *TupleSuite) TestVectorMagnitude() {
 	expectedMagnitude := math.Sqrt(14)
 	suite.True(compare.Equal(Vector(1, 2, 3).Magnitude(), expectedMagnitude))
 	suite.True(compare.Equal(Vector(-1, -2, -3).Magnitude(), expectedMagnitude))
+}
+
+func (suite *TupleSuite) TestVectorNormalization() {
+	suite.EqualTuples(Vector(5, 0, 0).Normalize(), Vector(1, 0, 0))
+	suite.EqualTuples(Vector(0, 5, 0).Normalize(), Vector(0, 1, 0))
+	suite.EqualTuples(Vector(0, 0, 5).Normalize(), Vector(0, 0, 1))
+
+	normalizedVector := Vector(1, 2, 3).Normalize()
+
+	suite.EqualTuples(normalizedVector, Vector(0.267261241912, 0.534522483825, 0.801783725737))
 }
 
 func TestTupleSuite(t *testing.T) {
