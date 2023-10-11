@@ -1,6 +1,8 @@
 package tuple
 
 import (
+	"andrecastelo/raytracer/internal/compare"
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -107,6 +109,27 @@ func (suite *TupleSuite) TestMultiplyingTupleByFraction() {
 	suite.Equal(newTuple.y, -1.0)
 	suite.Equal(newTuple.z, 1.5)
 	suite.Equal(newTuple.w, -2)
+}
+
+func (suite *TupleSuite) TestDividingTupleByScalar() {
+	tuple := MakeTuple(1, -2, 3, -4)
+
+	newTuple := tuple.Divide(2)
+
+	suite.Equal(newTuple.x, 0.5)
+	suite.Equal(newTuple.y, -1.0)
+	suite.Equal(newTuple.z, 1.5)
+	suite.Equal(newTuple.w, -2)
+}
+
+func (suite *TupleSuite) TestVectorMagnitude() {
+	suite.Equal(Vector(1, 0, 0).Magnitude(), 1.0)
+	suite.Equal(Vector(0, 1, 0).Magnitude(), 1.0)
+	suite.Equal(Vector(0, 0, 1).Magnitude(), 1.0)
+
+	expectedMagnitude := math.Sqrt(14)
+	suite.True(compare.Equal(Vector(1, 2, 3).Magnitude(), expectedMagnitude))
+	suite.True(compare.Equal(Vector(-1, -2, -3).Magnitude(), expectedMagnitude))
 }
 
 func TestTupleSuite(t *testing.T) {
