@@ -9,5 +9,5 @@ clean:
 # Clears the test cache and runs the tests
 test:
     go clean -testcache
-    go test
+    go test ./...
 
