@@ -150,6 +150,41 @@ func (suite *TupleSuite) TestVectorNormalization() {
 	suite.EqualTuples(normalizedVector, Vector(0.267261241912, 0.534522483825, 0.801783725737))
 }
 
+func (suite *TupleSuite) TestVectorDotProduct() {
+	vectorA := Vector(1, 2, 3)
+	vectorB := Vector(2, 3, 4)
+
+	dotProduct := vectorA.Dot(vectorB)
+
+	suite.Equal(dotProduct, 20.0)
+
+	suite.Equal(Vector(1, 0, 0).Dot(Vector(1, 0, 0)), 1.0)
+	suite.Equal(Vector(1, 0, 0).Dot(Vector(-1, 0, 0)), -1.0)
+
+	suite.Equal(Vector(1, 0, 0).Dot(Vector(0, 1, 0)), 0.0)
+	suite.Equal(Vector(1, 0, 0).Dot(Vector(0, -1, 0)), 0.0)
+}
+
+func (suite *TupleSuite) TestVectorCrossProduct() {
+	vectorA := Vector(1, 2, 3)
+	vectorB := Vector(2, 3, 4)
+
+	suite.EqualTuples(vectorA.Cross(vectorB), Vector(-1, 2, -1))
+	suite.EqualTuples(vectorB.Cross(vectorA), Vector(1, -2, 1))
+
+	x := Vector(1, 0, 0)
+	y := Vector(0, 1, 0)
+	z := Vector(0, 0, 1)
+
+	suite.EqualTuples(x.Cross(y), z)
+	suite.EqualTuples(y.Cross(z), x)
+	suite.EqualTuples(x.Cross(y), z)
+
+	suite.EqualTuples(z.Cross(y), x.Negate())
+	suite.EqualTuples(y.Cross(x), z.Negate())
+	suite.EqualTuples(x.Cross(z), y.Negate())
+}
+
 func TestTupleSuite(t *testing.T) {
 	suite.Run(t, new(TupleSuite))
 }
