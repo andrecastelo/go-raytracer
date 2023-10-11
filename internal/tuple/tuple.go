@@ -19,6 +19,10 @@ func Vector(x float64, y float64, z float64) *Tuple {
 	return MakeTuple(x, y, z, 0)
 }
 
+func Color(r float64, g float64, b float64) *Tuple {
+	return MakeTuple(r, g, b, 0)
+}
+
 func (t *Tuple) Add(t2 *Tuple) *Tuple {
 	return &Tuple{
 		x: t.x + t2.x,
@@ -88,5 +92,14 @@ func (t *Tuple) Cross(t2 *Tuple) *Tuple {
 		(t.y*t2.z)-(t.z*t2.y),
 		(t.z*t2.x)-(t.x*t2.z),
 		(t.x*t2.y)-(t.y*t2.x),
+	)
+}
+
+// Hadamard Product (or Schur product) is a method of blending two colors
+func (t *Tuple) Hadamard(t2 *Tuple) *Tuple {
+	return Color(
+		t.x*t2.x,
+		t.y*t2.y,
+		t.z*t2.z,
 	)
 }

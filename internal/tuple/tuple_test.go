@@ -185,6 +185,15 @@ func (suite *TupleSuite) TestVectorCrossProduct() {
 	suite.EqualTuples(x.Cross(z), y.Negate())
 }
 
+func (suite *TupleSuite) TestHadamardProduct() {
+	colorA := Color(1.0, 0.2, 0.4)
+	colorB := Color(0.9, 1.0, 0.1)
+
+	blendedColor := colorA.Hadamard(colorB)
+
+	suite.EqualTuples(blendedColor, Color(0.9, 0.2, 0.04))
+}
+
 func TestTupleSuite(t *testing.T) {
 	suite.Run(t, new(TupleSuite))
 }
