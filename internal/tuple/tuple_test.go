@@ -34,10 +34,10 @@ func (suite *TupleSuite) TestTupleAddition() {
 
 	newPoint := point.Add(vector)
 
-	suite.Equal(newPoint.w, 1)
 	suite.Equal(newPoint.x, 1.0)
 	suite.Equal(newPoint.y, 1.0)
 	suite.Equal(newPoint.z, 6.0)
+	suite.Equal(newPoint.w, 1)
 }
 
 func (suite *TupleSuite) TestSubtractingTwoPoints() {
@@ -46,10 +46,10 @@ func (suite *TupleSuite) TestSubtractingTwoPoints() {
 
 	vector := pointA.Subtract(pointB)
 
-	suite.Equal(vector.w, 0)
 	suite.Equal(vector.x, -2.0)
 	suite.Equal(vector.y, -4.0)
 	suite.Equal(vector.z, -6.0)
+	suite.Equal(vector.w, 0)
 }
 
 func (suite *TupleSuite) TestSubtractingAVectorFromAPoint() {
@@ -58,10 +58,55 @@ func (suite *TupleSuite) TestSubtractingAVectorFromAPoint() {
 
 	newVector := point.Subtract(vector)
 
-	suite.Equal(newVector.w, 1)
 	suite.Equal(newVector.x, -2.0)
 	suite.Equal(newVector.y, -4.0)
 	suite.Equal(newVector.z, -6.0)
+	suite.Equal(newVector.w, 1)
+}
+
+func (suite *TupleSuite) TestSubtractingTwoVectors() {
+	vectorA := Vector(3, 2, 1)
+	vectorB := Vector(5, 6, 7)
+
+	newVector := vectorA.Subtract(vectorB)
+
+	suite.Equal(newVector.x, -2.0)
+	suite.Equal(newVector.y, -4.0)
+	suite.Equal(newVector.z, -6.0)
+	suite.Equal(newVector.w, 0)
+}
+
+func (suite *TupleSuite) TestNegatingATuple() {
+	tuple := MakeTuple(1, -2, 3, -4)
+
+	newTuple := tuple.Negate()
+
+	suite.Equal(newTuple.x, -1.0)
+	suite.Equal(newTuple.y, 2.0)
+	suite.Equal(newTuple.z, -3.0)
+	suite.Equal(newTuple.w, 4)
+}
+
+func (suite *TupleSuite) TestMultiplyingTupleByScalar() {
+	tuple := MakeTuple(1, -2, 3, -4)
+
+	newTuple := tuple.Multiply(3.5)
+
+	suite.Equal(newTuple.x, 3.5)
+	suite.Equal(newTuple.y, -7.0)
+	suite.Equal(newTuple.z, 10.5)
+	suite.Equal(newTuple.w, -14)
+}
+
+func (suite *TupleSuite) TestMultiplyingTupleByFraction() {
+	tuple := MakeTuple(1, -2, 3, -4)
+
+	newTuple := tuple.Multiply(0.5)
+
+	suite.Equal(newTuple.x, 0.5)
+	suite.Equal(newTuple.y, -1.0)
+	suite.Equal(newTuple.z, 1.5)
+	suite.Equal(newTuple.w, -2)
 }
 
 func TestTupleSuite(t *testing.T) {
