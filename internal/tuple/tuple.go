@@ -103,3 +103,9 @@ func (t *Tuple) Hadamard(t2 *Tuple) *Tuple {
 		t.z*t2.z,
 	)
 }
+
+// Useful when we want to break the tuple into RGB. We discard the W
+// component here
+func (t *Tuple) Array() [3]float64 {
+	return [...]float64{t.x, t.y, t.z}
+}

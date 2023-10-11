@@ -194,6 +194,12 @@ func (suite *TupleSuite) TestHadamardProduct() {
 	suite.EqualTuples(blendedColor, Color(0.9, 0.2, 0.04))
 }
 
+func (suite *TupleSuite) TestArrayIgnoresWComponent() {
+	tupleA := MakeTuple(13, 12, 11, 10)
+
+	suite.Equal(tupleA.Array(), [...]float64{13.0, 12.0, 11.0})
+}
+
 func TestTupleSuite(t *testing.T) {
 	suite.Run(t, new(TupleSuite))
 }
