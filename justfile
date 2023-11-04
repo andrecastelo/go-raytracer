@@ -1,7 +1,7 @@
 # use with https://github.com/casey/just
 
-default:
-    @just --list --justfile {{justfile()}}
+_default:
+    @just --list --unsorted --justfile {{justfile()}}
 
 # Runs the raytracer
 run:
