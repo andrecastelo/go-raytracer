@@ -15,15 +15,15 @@ type CanvasSuite struct {
 func (suite *CanvasSuite) TestCanvasCreation() {
     canvas := MakeCanvas(32, 16)
 
-    suite.Equal(canvas.width, 32)
-    suite.Equal(canvas.height, 16)
-    suite.Len(canvas.pixels, 32)
+    suite.Equal(canvas.Width, 32)
+    suite.Equal(canvas.Height, 16)
+    suite.Len(canvas.Pixels, 32)
 
-    for _, line := range canvas.pixels {
+    for _, line := range canvas.Pixels {
         suite.Len(line, 16)
     } 
 
-    firstPixel := canvas.pixels[0][0]
+    firstPixel := canvas.Pixels[0][0]
 	suite.Equal(firstPixel.Array(), [...]float64{0.0, 0.0, 0.0})
 }
 
@@ -33,7 +33,7 @@ func (suite *CanvasSuite) TestWritingPixelToCanvas() {
 
     canvas.WritePixel(2, 3, red)
 
-    suite.Equal(canvas.pixels[2][3].Array(), [...]float64{1.0, 0.0, 0.0})
+    suite.Equal(canvas.Pixels[2][3].Array(), [...]float64{1.0, 0.0, 0.0})
 }
 
 func (suite *CanvasSuite) TestCanvasPpmArray() {

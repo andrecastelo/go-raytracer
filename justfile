@@ -1,9 +1,22 @@
+# use with https://github.com/casey/just
+
+default:
+    @just --list --justfile {{justfile()}}
+
 # Runs the raytracer
 run:
     go run ./cmd/raytracer
 
+# Runs the gradient test
+gradient:
+    go run ./cmd/gradient
+
+# Deletes all .ppm images
+clear:
+    rm *.ppm
+
 # Clears the cache
-clean:
+clean-cache:
     go clean -cache
 
 # Clears the test cache and runs the tests
