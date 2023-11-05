@@ -37,7 +37,7 @@ func clamp(value int, max_value int, min_value int) int {
 }
 
 func (canvas *Canvas) WritePixel(x int, y int, color *tuple.Tuple) *Canvas {
-    canvas.Pixels[x][y] = *color
+    canvas.Pixels[y][x] = *color
 
     return canvas
 }

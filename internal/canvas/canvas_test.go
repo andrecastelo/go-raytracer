@@ -33,7 +33,7 @@ func (suite *CanvasSuite) TestWritingPixelToCanvas() {
 
     canvas.WritePixel(2, 3, red)
 
-    suite.Equal(canvas.Pixels[2][3].Array(), [...]float64{1.0, 0.0, 0.0})
+    suite.Equal(canvas.Pixels[3][2].Array(), [...]float64{1.0, 0.0, 0.0})
 }
 
 func (suite *CanvasSuite) TestCanvasPpmArray() {
@@ -42,8 +42,8 @@ func (suite *CanvasSuite) TestCanvasPpmArray() {
     c2 := tuple.Color(0.0, 0.5, 0.0)
     c3 := tuple.Color(-0.5, 0.0, 1.0)
     canvas.WritePixel(0, 0, c1)
-    canvas.WritePixel(2, 1, c2)
-    canvas.WritePixel(4, 2, c3)
+    canvas.WritePixel(1, 2, c2)
+    canvas.WritePixel(2, 4, c3)
     ppm := canvas.PpmArray()
     
     suite.Equal("P3", ppm[0])
@@ -60,8 +60,8 @@ func (suite *CanvasSuite) TestCanvasPpmString() {
     c2 := tuple.Color(0.0, 0.5, 0.0)
     c3 := tuple.Color(-0.5, 0.0, 1.0)
     canvas.WritePixel(0, 0, c1)
-    canvas.WritePixel(1, 0, c2)
-    canvas.WritePixel(2, 0, c3)
+    canvas.WritePixel(0, 1, c2)
+    canvas.WritePixel(0, 2, c3)
     ppm := canvas.Ppm()
 
     expected := `P3
