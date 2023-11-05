@@ -3,12 +3,12 @@ package tuple
 import "math"
 
 type Tuple struct {
-	x, y, z float64
-	w       int
+	X, Y, Z float64
+	W       int
 }
 
 func MakeTuple(x float64, y float64, z float64, w int) *Tuple {
-	return &Tuple{x: x, y: y, z: z, w: w}
+	return &Tuple{X: x, Y: y, Z: z, W: w}
 }
 
 func Point(x float64, y float64, z float64) *Tuple {
@@ -25,87 +25,87 @@ func Color(r float64, g float64, b float64) *Tuple {
 
 func (t *Tuple) Add(t2 *Tuple) *Tuple {
 	return &Tuple{
-		x: t.x + t2.x,
-		y: t.y + t2.y,
-		z: t.z + t2.z,
-		w: t.w + t2.w,
+		X: t.X + t2.X,
+		Y: t.Y + t2.Y,
+		Z: t.Z + t2.Z,
+		W: t.W + t2.W,
 	}
 }
 
 func (t *Tuple) Subtract(t2 *Tuple) *Tuple {
 	return &Tuple{
-		x: t.x - t2.x,
-		y: t.y - t2.y,
-		z: t.z - t2.z,
-		w: t.w - t2.w,
+		X: t.X - t2.X,
+		Y: t.Y - t2.Y,
+		Z: t.Z - t2.Z,
+		W: t.W - t2.W,
 	}
 }
 
 func (t *Tuple) Negate() *Tuple {
 	return &Tuple{
-		x: t.x * -1,
-		y: t.y * -1,
-		z: t.z * -1,
-		w: t.w * -1,
+		X: t.X * -1,
+		Y: t.Y * -1,
+		Z: t.Z * -1,
+		W: t.W * -1,
 	}
 }
 
 func (t *Tuple) Multiply(scalar float64) *Tuple {
 	return &Tuple{
-		x: t.x * scalar,
-		y: t.y * scalar,
-		z: t.z * scalar,
-		w: int(float64(t.w) * scalar),
+		X: t.X * scalar,
+		Y: t.Y * scalar,
+		Z: t.Z * scalar,
+		W: int(float64(t.W) * scalar),
 	}
 }
 
 func (t *Tuple) Divide(scalar float64) *Tuple {
 	return &Tuple{
-		x: t.x / scalar,
-		y: t.y / scalar,
-		z: t.z / scalar,
-		w: int(float64(t.w) / scalar),
+		X: t.X / scalar,
+		Y: t.Y / scalar,
+		Z: t.Z / scalar,
+		W: int(float64(t.W) / scalar),
 	}
 }
 
 func (t *Tuple) Magnitude() float64 {
-	return math.Sqrt(math.Pow(t.x, 2) + math.Pow(t.y, 2) + math.Pow(t.z, 2))
+	return math.Sqrt(math.Pow(t.X, 2) + math.Pow(t.Y, 2) + math.Pow(t.Z, 2))
 }
 
 func (t *Tuple) Normalize() *Tuple {
 	magnitude := t.Magnitude()
 
 	return &Tuple{
-		x: t.x / magnitude,
-		y: t.y / magnitude,
-		z: t.z / magnitude,
-		w: 0,
+		X: t.X / magnitude,
+		Y: t.Y / magnitude,
+		Z: t.Z / magnitude,
+		W: 0,
 	}
 }
 
 func (t *Tuple) Dot(t2 *Tuple) float64 {
-	return t.x*t2.x + t.y*t2.y + t.z*t2.z + float64(t.w*t2.w)
+	return t.X*t2.X + t.Y*t2.Y + t.Z*t2.Z + float64(t.W*t2.W)
 }
 
 func (t *Tuple) Cross(t2 *Tuple) *Tuple {
 	return Vector(
-		(t.y*t2.z)-(t.z*t2.y),
-		(t.z*t2.x)-(t.x*t2.z),
-		(t.x*t2.y)-(t.y*t2.x),
+		(t.Y*t2.Z)-(t.Z*t2.Y),
+		(t.Z*t2.X)-(t.X*t2.Z),
+		(t.X*t2.Y)-(t.Y*t2.X),
 	)
 }
 
 // Hadamard Product (or Schur product) is a method of blending two colors
 func (t *Tuple) Hadamard(t2 *Tuple) *Tuple {
 	return Color(
-		t.x*t2.x,
-		t.y*t2.y,
-		t.z*t2.z,
+		t.X*t2.X,
+		t.Y*t2.Y,
+		t.Z*t2.Z,
 	)
 }
 
 // Useful when we want to break the tuple into RGB. We discard the W
 // component here
 func (t *Tuple) Array() [3]float64 {
-	return [...]float64{t.x, t.y, t.z}
+	return [...]float64{t.X, t.Y, t.Z}
 }
