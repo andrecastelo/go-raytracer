@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	IMAGE_HEIGHT = 512
-	IMAGE_WIDTH  = 512
+    IMAGE_WIDTH  = 900
+	IMAGE_HEIGHT = 550
     FILENAME = "projectile"
 )
 
@@ -39,17 +39,18 @@ func main() {
     c := canvas.MakeCanvas(IMAGE_WIDTH, IMAGE_HEIGHT)
 
     white := tuple.Color(1, 1, 1)
-    projectile := tuple.Point(0, 0, 0)
-    force := tuple.Vector(10, 10, 0)
-    gravity := tuple.Vector(0, 0.2, 0)
+    projectile := tuple.Point(0, 1, 0)
+    velocity := tuple.Vector(1, 1.8, 0).Normalize().Multiply(11.25)
+    wind := tuple.Vector(-0.01, 0, 0)
+    gravity := tuple.Vector(0, -0.1, 0)
 
     pixelsDrawn := 0
 
-    for projectile.X < IMAGE_WIDTH && projectile.X >= 0 && 
-        projectile.Y < IMAGE_HEIGHT && projectile.Y >= 0 {
+    for projectile.X < (IMAGE_WIDTH - 1) && projectile.X >= 0 && 
+        projectile.Y < (IMAGE_HEIGHT - 1) && projectile.Y >= 0 {
         writePoint(c, projectile, white)
-        projectile = projectile.Add(force)
-        force = force.Subtract(gravity)
+        projectile = projectile.Add(velocity)
+        velocity = velocity.Add(gravity).Add(wind)
         pixelsDrawn++
         fmt.Printf("\rPixels drawn: %d", pixelsDrawn)
     }
