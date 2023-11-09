@@ -24,7 +24,7 @@ func main() {
     c := canvas.MakeCanvas(IMAGE_WIDTH, IMAGE_HEIGHT)
 
     for x, line := range c.Pixels {
-        for y, _ := range line {
+        for y := range line {
 			r := float64(x) / (IMAGE_WIDTH - 1)
 			g := float64(y) / (IMAGE_HEIGHT - 1)
 			b := 1.0 - (float64(x) / (IMAGE_HEIGHT - 1))
