@@ -18,9 +18,9 @@ func MakeCanvas(width int, height int) *Canvas {
 
     canvas.Width = width
     canvas.Height = height
-    canvas.Pixels = make([][]tuple.Tuple, width)
-    for i := 0; i < width; i++ {
-        canvas.Pixels[i] = make([]tuple.Tuple, height)
+    canvas.Pixels = make([][]tuple.Tuple, height)
+    for i := 0; i < height; i++ {
+        canvas.Pixels[i] = make([]tuple.Tuple, width)
     }
 
     return canvas

@@ -17,14 +17,17 @@ func (suite *CanvasSuite) TestCanvasCreation() {
 
     suite.Equal(canvas.Width, 32)
     suite.Equal(canvas.Height, 16)
-    suite.Len(canvas.Pixels, 32)
+    suite.Len(canvas.Pixels, 16)
 
     for _, line := range canvas.Pixels {
-        suite.Len(line, 16)
+        suite.Len(line, 32)
     } 
 
     firstPixel := canvas.Pixels[0][0]
 	suite.Equal(firstPixel.Array(), [...]float64{0.0, 0.0, 0.0})
+
+    lastPixel := canvas.Pixels[15][31]
+    suite.Equal(lastPixel.Array(), [...]float64{0.0, 0.0, 0.0})
 }
 
 func (suite *CanvasSuite) TestWritingPixelToCanvas() {
@@ -42,8 +45,8 @@ func (suite *CanvasSuite) TestCanvasPpmArray() {
     c2 := tuple.Color(0.0, 0.5, 0.0)
     c3 := tuple.Color(-0.5, 0.0, 1.0)
     canvas.WritePixel(0, 0, c1)
-    canvas.WritePixel(1, 2, c2)
-    canvas.WritePixel(2, 4, c3)
+    canvas.WritePixel(2, 1, c2)
+    canvas.WritePixel(4, 2, c3)
     ppm := canvas.PpmArray()
     
     suite.Equal("P3", ppm[0])
