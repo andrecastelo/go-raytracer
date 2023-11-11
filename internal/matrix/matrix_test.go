@@ -1,8 +1,10 @@
 package matrix
 
 import (
-	"github.com/stretchr/testify/suite"
+	"andrecastelo/raytracer/internal/compare"
 	"testing"
+
+	"github.com/stretchr/testify/suite"
 )
 
 type MatrixSuite struct {
@@ -12,9 +14,35 @@ type MatrixSuite struct {
 func (suite *MatrixSuite) MatrixesAreEqual(a [][]float64, b [][]float64) {
 	for i := range a {
 		for j := range a[i] {
-			suite.Equal(a[i][j], b[i][j])
+			suite.True(compare.Equal(a[i][j], b[i][j]))
 		}
 	}
+}
+
+func (suite *MatrixSuite) TestMatrixEquality() {
+	a := [][]float64{
+		{1.0, 2.0, 3.0, 4.0},
+		{5.0, 6.0, 7.0, 8.0},
+		{9.0, 10.0, 11.0, 12.0},
+		{13.0, 14.0, 15.0, 16.0},
+	}
+
+	b := [][]float64{
+		{1.0, 2.0, 3.0, 4.0},
+		{5.0, 6.0, 7.0, 8.0},
+		{9.0, 10.0, 11.0, 12.0},
+		{13.0, 14.0, 15.0, 16.0},
+	}
+
+	c := [][]float64{
+		{0.0, 2.0, 3.0, 4.0},
+		{5.0, 6.0, 7.0, 8.0},
+		{9.0, 10.0, 11.0, 12.0},
+		{13.0, 14.0, 15.0, 16.0},
+	}
+
+	suite.True(Equal(a, b))
+	suite.False(Equal(a, c))
 }
 
 func (suite *MatrixSuite) TestCanCreateMatrix() {
