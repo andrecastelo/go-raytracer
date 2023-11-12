@@ -32,3 +32,19 @@ func Equal(a Matrix, b Matrix) bool {
 
 	return true
 }
+
+// Multiply will multiply two 4x4 matrices and return a new one
+func Multiply(a Matrix, b Matrix) Matrix {
+	result := make([][]float64, 4)
+	for line := 0; line < 4; line++ {
+		result[line] = make([]float64, 4)
+		for col := 0; col < 4; col++ {
+			result[line][col] = a[line][0] * b[0][col]
+			result[line][col] += a[line][1] * b[1][col]
+			result[line][col] += a[line][2] * b[2][col]
+			result[line][col] += a[line][3] * b[3][col]
+		}
+	}
+
+	return result
+}
