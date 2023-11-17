@@ -2,6 +2,7 @@ package matrix
 
 import (
 	"andrecastelo/raytracer/internal/compare"
+	"andrecastelo/raytracer/internal/tuple"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -17,6 +18,21 @@ func (suite *MatrixSuite) MatrixesAreEqual(a [][]float64, b [][]float64) {
 			suite.True(compare.Equal(a[i][j], b[i][j]))
 		}
 	}
+}
+
+func (suite *MatrixSuite) TestMatrixTupleMultiplication() {
+	a := [][]float64{
+		{1.0, 2.0, 3.0, 4.0},
+		{2.0, 4.0, 4.0, 2.0},
+		{8.0, 6.0, 4.0, 1.0},
+		{0.0, 0.0, 0.0, 1.0},
+	}
+
+	t := tuple.MakeTuple(1.0, 2.0, 3.0, 1.0)
+
+	expected := tuple.MakeTuple(18.0, 24.0, 33.0, 1.0)
+
+	suite.Equal(expected, MultiplyByTuple(a, *t))
 }
 
 func (suite *MatrixSuite) TestMatrixMultiplication() {

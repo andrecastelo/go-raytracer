@@ -2,6 +2,7 @@ package matrix
 
 import (
 	"andrecastelo/raytracer/internal/compare"
+	"andrecastelo/raytracer/internal/tuple"
 	"errors"
 )
 
@@ -47,4 +48,14 @@ func Multiply(a Matrix, b Matrix) Matrix {
 	}
 
 	return result
+}
+
+func MultiplyByTuple(a Matrix, t tuple.Tuple) *tuple.Tuple {
+	sum := [4]float64{}
+
+	for i := 0; i < len(sum); i++ {
+		sum[i] = a[i][0]*t.X + a[i][1]*t.Y + a[i][2]*t.Z + a[i][3]*float64(t.W)
+	}
+
+	return tuple.MakeTuple(sum[0], sum[1], sum[2], int(sum[3]))
 }

@@ -58,7 +58,7 @@ func (t *Tuple) Negate() *Tuple {
 	}
 }
 
-// Multiplies a vector by a scalar value. 
+// Multiplies a vector by a scalar value.
 func (t *Tuple) Multiply(scalar float64) *Tuple {
 	return &Tuple{
 		X: t.X * scalar,
@@ -78,7 +78,7 @@ func (t *Tuple) Divide(scalar float64) *Tuple {
 	}
 }
 
-// Magnitude should be pretty self explanatory. Returns the "size" of 
+// Magnitude should be pretty self explanatory. Returns the "size" of
 // the vector.
 func (t *Tuple) Magnitude() float64 {
 	return math.Sqrt(math.Pow(t.X, 2) + math.Pow(t.Y, 2) + math.Pow(t.Z, 2))
@@ -122,6 +122,6 @@ func (t *Tuple) Hadamard(t2 *Tuple) *Tuple {
 
 // Useful when we want to break the tuple into RGB. We discard the W
 // component here
-func (t *Tuple) Array() [3]float64 {
-	return [...]float64{t.X, t.Y, t.Z}
+func (t *Tuple) Array() [4]float64 {
+	return [...]float64{t.X, t.Y, t.Z, float64(t.W)}
 }
