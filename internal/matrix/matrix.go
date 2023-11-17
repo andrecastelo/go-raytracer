@@ -8,6 +8,16 @@ import (
 
 type Matrix = [][]float64
 
+// Returns an identity matrix
+func Identity() [][]float64 {
+	return [][]float64{
+		{1.0, 0.0, 0.0, 0.0},
+		{0.0, 1.0, 0.0, 0.0},
+		{0.0, 0.0, 1.0, 0.0},
+		{0.0, 0.0, 0.0, 1.0},
+	}
+}
+
 func MakeMatrix(elements [][]float64) (Matrix, error) {
 	height := len(elements)
 	width := len(elements[0])
